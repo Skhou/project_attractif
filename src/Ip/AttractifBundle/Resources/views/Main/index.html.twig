@@ -1,0 +1,62 @@
+{% extends("IpAttractifBundle::layout.html.twig") %}
+{% block content_header %}Tableau de bord{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Prochaines ventes</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nom de l'événement</th>
+                            <th>Début</th>
+                            <th>Fin</th>
+                            <th>Lieu</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for event in events %}
+                            <tr>
+                                <td>{{ event.name }}</td>
+                                <td>{{ event.startDate|date("d/m/Y") }}</td>
+                                <td>{{ event.endDate|date("d/m/Y") }}</td>
+                                <td>{{ event.location.name }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Les 10 meilleures ventes</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nom du produit</th>
+                            <th>Quantité total achetée</th>
+                            <th>Stock restant</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for purchase in purchases %}
+                        <tr>
+                            <td>{{ purchase.0.product.name }}</td>
+                            <td>{{ purchase.total }}</td>
+                            <td>{{ purchase.0.product.stock }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

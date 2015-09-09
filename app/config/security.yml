@@ -1,0 +1,40 @@
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        Ip\AttractifBundle\Entity\Admin: plaintext
+
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_EDITOR
+        ROLE_SUPER_ADMIN: [ROLE_EDITOR, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        chain_provider:
+            chain:
+                providers: [main, in_memory]
+        in_memory:
+            memory:
+                users:
+                    admin: { password: admin, roles: ["ROLE_ADMIN"] }
+        main:
+            entity: { class: \Ip\AttractifBundle\Entity\Admin, property: username }
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern: ^/
+            anonymous: true
+            provider: chain_provider
+            form_login:
+                login_path: login
+                check_path: login_check
+            logout:
+                path: logout
+                target: login
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^, roles: IS_AUTHENTICATED_REMEMBERED }

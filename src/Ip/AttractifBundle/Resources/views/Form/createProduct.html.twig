@@ -1,0 +1,62 @@
+{% extends "IpAttractifBundle::layout.html.twig" %}
+{% block content_header %}{{ typeOfAction }} de produit{% endblock %}
+{% block body %}
+    <div class="row">
+
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="flash-notice">
+                {{ flashMessage }}
+                <br><br>
+            </div>
+        {% endfor %}
+
+        <!-- general form elements -->
+        <div>
+            <div class="col-md-6">
+                <!-- form start -->
+                {{ form_start(form, {attr: {role: 'form'}}) }}
+                <div class="box-body">
+                    <div class="form-group">
+                        {{ form_label(form.ref, 'Référence') }}
+                        {{ form_widget(form.ref, {attr: {class: 'form-control'}}) }}
+                        {{ form_errors(form.ref) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.name, 'Nom du produit') }}
+                        {{ form_widget(form.name, {attr: {class: 'form-control'}}) }}
+                        {{ form_errors(form.name) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.description, 'Description') }}
+                        {{ form_widget(form.description, {attr: {class: 'form-control'}}) }}
+                        {{ form_errors(form.description) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.price, 'Prix unitaire') }}
+                        {{ form_widget(form.price, {attr: {class: 'form-control'}}) }}
+                        {{ form_errors(form.price) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.stock, 'Stock') }}
+                        {{ form_widget(form.stock, {attr: {class: 'form-control'}}) }}
+                        {{ form_errors(form.stock) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.file, 'Image') }}
+                        {{ form_widget(form.file) }}
+                        {{ form_errors(form.file) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.category, 'Catégorie') }}
+                        {{ form_widget(form.category, {attr: {class: 'form-control'}}) }}
+                        {{ form_errors(form.category) }}
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">{{ bouton }}</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div><!-- /.box -->
+    </div>
+{% endblock %}

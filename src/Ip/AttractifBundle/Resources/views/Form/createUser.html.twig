@@ -1,0 +1,42 @@
+{% extends "IpAttractifBundle::layout.html.twig" %}
+{% block content_header %}{{ typeOfAction }} du client{% endblock %}
+{% block body %}
+    <div class="row">
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="flash-notice">
+            {{ flashMessage }}
+            <br><br>
+        </div>
+    {% endfor %}
+
+        <!-- general form elements -->
+        <div>
+            <div class="col-md-6">
+                <!-- form start -->
+                {{ form_start(form, {attr: {role: 'form'}}) }}
+                <div class="box-body">
+                    <div class="form-group">
+                        {{ form_label(form.username, 'Pseudo') }}
+                        {{ form_widget(form.username, {attr: {class: 'form-control'}}) }}
+                        {{ form_errors(form.username) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.email, 'Email') }}
+                        {{ form_widget(form.email, {attr: {class: 'form-control'}}) }}
+                        {{ form_errors(form.email) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.flags, 'Flags') }}
+                        {{ form_widget(form.flags, {attr: {class: 'form-control'}}) }}
+                        {{ form_errors(form.flags) }}
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div><!-- /.box -->
+    </div>
+{% endblock %}

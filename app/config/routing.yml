@@ -1,0 +1,13 @@
+ip_attractif:
+    resource: "@IpAttractifBundle/Resources/config/routing.yml"
+    prefix:   /
+
+login:
+    pattern: /login
+    defaults: { _controller: IpAttractifBundle:Main:login }
+
+login_check:
+    pattern: /login_check
+
+logout:
+    pattern: /logout

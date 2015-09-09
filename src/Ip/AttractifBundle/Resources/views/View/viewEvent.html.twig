@@ -1,0 +1,61 @@
+{% extends "IpAttractifBundle::layout.html.twig" %}
+{% block content_header %}Liste des évènements{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body table-responsive">
+
+                    {% for flashMessage in app.session.flashbag.get('notice') %}
+                        <div class="flash-notice">
+                            {{ flashMessage }}
+                            <br><br>
+                        </div>
+                    {% endfor %}
+
+                    <table id="table_id" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Description</th>
+                            <th>Début</th>
+                            <th>Fin</th>
+                            <th>Lieu</th>
+                            <th>Place</th>
+                            <th>Produit(s) mis en vente</th>
+                            <th>Image</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for event in events %}
+                            <tr>
+                                <td><a href="{{ path("ip_attractif_requests", {"id": event.id}) }}">{{ event.name }}</a></td>
+                                <td>{{ event.description }}</td>
+                                <td>{{ event.startDate|date("d/m/Y") }}</td>
+                                <td>{{ event.endDate|date("d/m/Y") }}</td>
+                                <td>{{ event.location.name }}</td>
+                                <td>{{ event.place }}</td>
+                                <td>
+                                    <ul>
+                                {% for product in event.products %}
+                                    <li>{{ product.name }}</li>
+                                {% endfor %}
+                                    </ul>
+                                </td>
+                                <td><img style="width: 150px; height:auto;" src="{{ event.image }}" alt=""/></td>
+                                <td>
+                                    <a href="{{ path("ip_attractif_edit", {"entityType": "event", "id": event.id}) }}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                                    <a class="button_delete" href="{{ path("ip_attractif_delete", {"entityType": "event", "id": event.id}) }}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

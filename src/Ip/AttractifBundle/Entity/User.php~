@@ -1,0 +1,565 @@
+<?php
+
+namespace Ip\AttractifBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * User
+ *
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="Ip\AttractifBundle\Repository\UserRepository")
+ */
+class User
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     *
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Ip\AttractifBundle\Entity\Purchase", mappedBy="user")
+     */
+    private $products;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Ip\AttractifBundle\Entity\Request", mappedBy="user")
+     */
+    private $requests;
+
+    /**
+     *
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Ip\AttractifBundle\Entity\Product", mappedBy="usersFavorites")
+     */
+    private $favorites;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\Column(name="username", type="string", length=25)
+     */
+    private $username;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password_hash", type="string", length=60)
+     */
+    private $passwordHash;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="auth_key", type="string", length=32)
+     */
+    private $authKey;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="confirmed_at", type="integer")
+     */
+    private $confirmedAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="unconfirmed_email", type="string", length=255)
+     */
+    private $unconfirmedEmail;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="blocked_at", type="integer")
+     */
+    private $blockedAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="role", type="string", length=255)
+     */
+    private $role;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="registration_ip", type="bigint")
+     */
+    private $registrationIp;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="created_at", type="integer")
+     */
+    private $createdAt;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="updated_at", type="integer")
+     */
+    private $updatedAt;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="flags", type="integer")
+     */
+    private $flags;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     * @return User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string 
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set passwordHash
+     *
+     * @param string $passwordHash
+     * @return User
+     */
+    public function setPasswordHash($passwordHash)
+    {
+        $this->passwordHash = $passwordHash;
+
+        return $this;
+    }
+
+    /**
+     * Get passwordHash
+     *
+     * @return string 
+     */
+    public function getPasswordHash()
+    {
+        return $this->passwordHash;
+    }
+
+    /**
+     * Set authKey
+     *
+     * @param string $authKey
+     * @return User
+     */
+    public function setAuthKey($authKey)
+    {
+        $this->authKey = $authKey;
+
+        return $this;
+    }
+
+    /**
+     * Get authKey
+     *
+     * @return string 
+     */
+    public function getAuthKey()
+    {
+        return $this->authKey;
+    }
+
+    /**
+     * Set confirmedAt
+     *
+     * @param integer $confirmedAt
+     * @return User
+     */
+    public function setConfirmedAt($confirmedAt)
+    {
+        $this->confirmedAt = $confirmedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get confirmedAt
+     *
+     * @return integer 
+     */
+    public function getConfirmedAt()
+    {
+        return $this->confirmedAt;
+    }
+
+    /**
+     * Set unconfirmedEmail
+     *
+     * @param string $unconfirmedEmail
+     * @return User
+     */
+    public function setUnconfirmedEmail($unconfirmedEmail)
+    {
+        $this->unconfirmedEmail = $unconfirmedEmail;
+
+        return $this;
+    }
+
+    /**
+     * Get unconfirmedEmail
+     *
+     * @return string 
+     */
+    public function getUnconfirmedEmail()
+    {
+        return $this->unconfirmedEmail;
+    }
+
+    /**
+     * Set blockedAt
+     *
+     * @param integer $blockedAt
+     * @return User
+     */
+    public function setBlockedAt($blockedAt)
+    {
+        $this->blockedAt = $blockedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get blockedAt
+     *
+     * @return integer 
+     */
+    public function getBlockedAt()
+    {
+        return $this->blockedAt;
+    }
+
+    /**
+     * Set role
+     *
+     * @param string $role
+     * @return User
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return string 
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * Set registrationIp
+     *
+     * @param integer $registrationIp
+     * @return User
+     */
+    public function setRegistrationIp($registrationIp)
+    {
+        $this->registrationIp = $registrationIp;
+
+        return $this;
+    }
+
+    /**
+     * Get registrationIp
+     *
+     * @return integer 
+     */
+    public function getRegistrationIp()
+    {
+        return $this->registrationIp;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param integer $createdAt
+     * @return User
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return integer 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param integer $updatedAt
+     * @return User
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return integer 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set flags
+     *
+     * @param integer $flags
+     * @return User
+     */
+    public function setFlags($flags)
+    {
+        $this->flags = $flags;
+
+        return $this;
+    }
+
+    /**
+     * Get flags
+     *
+     * @return integer 
+     */
+    public function getFlags()
+    {
+        return $this->flags;
+    }
+//    /**
+//     * Constructor
+//     */
+//    public function __construct()
+//    {
+//        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+//    }
+
+    /**
+     * Add events
+     *
+     * @param \Ip\AttractifBundle\Entity\Event $events
+     * @return User
+     */
+    public function addEvent(\Ip\AttractifBundle\Entity\Event $events)
+    {
+        $this->events[] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param \Ip\AttractifBundle\Entity\Event $events
+     */
+    public function removeEvent(\Ip\AttractifBundle\Entity\Event $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * Add products
+     *
+     * @param \Ip\AttractifBundle\Entity\Purchase $products
+     * @return User
+     */
+    public function addProduct(\Ip\AttractifBundle\Entity\Purchase $products)
+    {
+        $this->products[] = $products;
+
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \Ip\AttractifBundle\Entity\Purchase $products
+     */
+    public function removeProduct(\Ip\AttractifBundle\Entity\Purchase $products)
+    {
+        $this->products->removeElement($products);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * Add favorites
+     *
+     * @param \Ip\AttractifBundle\Entity\Favorite $favorites
+     * @return User
+     */
+    public function addFavorite(\Ip\AttractifBundle\Entity\Favorite $favorites)
+    {
+        $this->favorites[] = $favorites;
+
+        return $this;
+    }
+
+    /**
+     * Remove favorites
+     *
+     * @param \Ip\AttractifBundle\Entity\Favorite $favorites
+     */
+    public function removeFavorite(\Ip\AttractifBundle\Entity\Favorite $favorites)
+    {
+        $this->favorites->removeElement($favorites);
+    }
+
+    /**
+     * Get favorites
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFavorites()
+    {
+        return $this->favorites;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->favorites = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+    /**
+     * Add requests
+     *
+     * @param \Ip\AttractifBundle\Entity\Request $requests
+     * @return User
+     */
+    public function addRequest(\Ip\AttractifBundle\Entity\Request $requests)
+    {
+        $this->requests[] = $requests;
+
+        return $this;
+    }
+
+    /**
+     * Remove requests
+     *
+     * @param \Ip\AttractifBundle\Entity\Request $requests
+     */
+    public function removeRequest(\Ip\AttractifBundle\Entity\Request $requests)
+    {
+        $this->requests->removeElement($requests);
+    }
+
+    /**
+     * Get requests
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRequests()
+    {
+        return $this->requests;
+    }
+}

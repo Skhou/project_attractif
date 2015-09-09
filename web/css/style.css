@@ -1,0 +1,34 @@
+.checkbox-product-events
+{
+}
+.checkbox-product-events label
+{
+    width: 100%;
+    display: block;
+}
+.checkbox-product-events .icheckbox_minimal
+{
+    float: left;
+    margin-right: 10px;
+}
+.page-view-request .dataTables_filter
+{
+    display: none;
+}
+
+.flash-notice {
+    background-color: #3c8dbc;
+    border-radius: 5px;
+    color: white;
+    display: inline-block;
+    font-size: 19px;
+    line-height: 4px;
+    margin-bottom: 24px;
+    margin-left: 14px;
+    padding: 10px;
+}
+
+.logo-img {
+    position:relative;
+    top:-5px;
+}

@@ -1,0 +1,60 @@
+{% extends "IpAttractifBundle::layout.html.twig" %}
+{% block content_header %}Liste des demandes de participation{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body table-responsive page-view-request">
+
+                    {% for flashMessage in app.session.flashbag.get('notice') %}
+                        <div class="flash-notice">
+                            {{ flashMessage }}
+                            <br><br>
+                        </div>
+                    {% endfor %}
+
+                    <h3>Pour l'évènement : {{ event.name }}</h3>
+                    <h4>Demandes de participation en attente</h4>
+                    <table id="table_id" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Utilisateur</th>
+                            <th>Statut</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for request in requestsPending %}
+                            <tr>
+                                <td>{{ request.user.username }}</td>
+                                <td>{{ request.status }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <h4>Demandes acceptées après tirage au sort</h4>
+                    <table id="table_id2" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Utilisateur</th>
+                            <th>Statut</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for request in requestsAccepted %}
+                            <tr>
+                                <td>{{ request.user.username }}</td>
+                                <td>{{ request.status }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <a class="btn btn-primary btn-lg" href=" {{ path("ip_attractif_requests", {"id":app.request.attributes.get('_route_params').id, "randomSelect":"true"}) }}
+                ">Generer un tirage au sort</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

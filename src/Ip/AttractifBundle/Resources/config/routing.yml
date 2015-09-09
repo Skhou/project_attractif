@@ -1,0 +1,88 @@
+#main route
+ip_attractif_index:
+    path:     /
+    defaults: { _controller: IpAttractifBundle:Main:index }
+
+ip_attractif_test:
+    path:     /test
+    defaults: { _controller: IpAttractifBundle:Main:test }
+
+ip_attractif_requests:
+    path:     /event/{id}/{randomSelect}
+    defaults: { _controller: IpAttractifBundle:View:viewRequest, randomSelect:false }
+    requirements:
+        id: \d+
+        randomSelect: true|false
+
+#create
+ip_attractif_create:
+    path:     /add/{entityType}
+    defaults: { _controller: IpAttractifBundle:Form:create }
+
+ip_attractif_create_purchase:
+    pattern: /create/purchase
+    defaults: { _controller: IpAttractifBundle:Form:createPurchase }
+
+ip_attractif_create_admin:
+    path:     /create/admin
+    defaults: { _controller: IpAttractifBundle:Form:createAdmin }
+
+#edit
+ip_attractif_edit:
+    path:     /edit/{entityType}/{id}
+    defaults: { _controller: IpAttractifBundle:Form:edit }
+    requirements:
+        id: \d+
+
+ip_attractif_edit_purchase:
+    path:     /modify/purchase/{id}
+    defaults: { _controller: IpAttractifBundle:Form:modifyPurchase}
+    requirements:
+        id: \d+
+
+ip_attractif_edit_admin:
+    path:     /modify/admin/{id}
+    defaults: { _controller: IpAttractifBundle:Form:modifyAdmin}
+    requirements:
+        id: \d+
+
+#delete
+ip_attractif_delete:
+    path:     /delete/{entityType}/{id}
+    defaults: { _controller: IpAttractifBundle:Form:delete}
+    requirements:
+        id: \d+
+
+#view
+ip_attractif_view_admin:
+    pattern: /view/admin
+    defaults: { _controller: IpAttractifBundle:View:viewAdmin }
+
+ip_attractif_view_user:
+    pattern: /view/user
+    defaults: { _controller: IpAttractifBundle:View:viewUser }
+
+ip_attractif_view_category:
+    pattern: /view/category
+    defaults: { _controller: IpAttractifBundle:View:viewCategory }
+
+ip_attractif_view_location:
+    pattern: /view/location
+    defaults: { _controller: IpAttractifBundle:View:viewLocation }
+
+ip_attractif_view_product:
+    pattern: /view/product
+    defaults: { _controller: IpAttractifBundle:View:viewProduct }
+
+ip_attractif_view_event:
+    pattern: /view/event
+    defaults: { _controller: IpAttractifBundle:View:viewEvent }
+
+ip_attractif_view_purchase:
+    pattern: /view/purchase
+    defaults: { _controller: IpAttractifBundle:View:viewPurchase }
+
+#export
+ip_attractif_export_user:
+    pattern: /export/user
+    defaults: { _controller: IpAttractifBundle:Export:export }
